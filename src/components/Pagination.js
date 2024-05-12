@@ -1,23 +1,22 @@
+
 import React from 'react';
 
-function Pagination({ currentPage, personsPerPage, totalPersons, paginate }) {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalPersons / personsPerPage); i++) {
-    pageNumbers.push(i);
-  }
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
-    <nav>
-      <ul className='pagination'>
-        {pageNumbers.map(number => (
-          <li key={number} className={number === currentPage ? 'active' : ''}>
-            <button onClick={() => paginate(number)}>{number}</button>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div>
+      {pageNumbers.map((pageNumber) => (
+        <button
+          key={pageNumber}
+          onClick={() => onPageChange(pageNumber)}
+          disabled={pageNumber === currentPage}
+        >
+          {pageNumber}
+        </button>
+      ))}
+    </div>
   );
-}
+};
 
 export default Pagination;

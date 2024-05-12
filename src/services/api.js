@@ -9,9 +9,9 @@ const api = axios.create({
   },
 });
 
-export const fetchPersons = async () => {
+export const fetchPersons = async (offset, limit) => {
   try {
-    const response = await api.get('/persons');
+    const response = await api.get(`/persons?offset=${offset}&limit=${limit}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching persons:', error);
